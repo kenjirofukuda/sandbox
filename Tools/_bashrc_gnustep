@@ -1,0 +1,21 @@
+# -*- mode: sh; coding: utf-8 -*- #
+
+initfile=/usr/local/share/GNUstep/Makefiles/GNUstep.sh
+if [ -f "$initfile" ]; then
+  . "$initfile"
+fi
+
+path1="${HOME}/Documents/github/kenjirofukuda/sandbox/bootstrap"
+if [ -d "$path1" ]; then
+  PATH="${PATH}:${path1}"
+fi
+
+path2="${HOME}/Documents/github/kenjirofukuda/sandbox/Tools"
+if [ -d "$path2" ]; then
+  PATH="${PATH}:${path2}"
+fi
+
+export PATH
+
+alias clang-objc="clang $(gnustep-config --objc-flags) $(gnustep-config --objc-libs) -fobjc-arc -lobjc -ldispatch -lgnustep-base"
+alias clang-objc-ast="clang -x objective-c -Xclang -ast-dump=json -fsyntax-only $(gnustep-config --objc-flags) -fobjc-arc "
