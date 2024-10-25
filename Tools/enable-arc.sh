@@ -12,4 +12,4 @@ if [ ! -d "$target_dir" ]; then
 fi
 
 find "$target_dir" -type f \( -name "GNUmakefile" -or -name "GNUmakefile.*" \) \
-  -exec "$(dirname $0)/_enable_arc.sh" {} \;
+  -exec "$(dirname $0)/_enable-arc.sh" {} \;
