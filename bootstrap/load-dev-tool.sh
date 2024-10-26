@@ -39,6 +39,11 @@ ensure_cmd cmake
 # editor
 ensure_cmd vim
 ensure_cmd emacs
+if [ $NIX_ID = "bsd" ]; then
+  ensure_cmd ag the_silver_searcher
+else
+  ensure_cmd ag silversearcher-ag
+fi
 
 #other
 ensure_cmd locate plocate
