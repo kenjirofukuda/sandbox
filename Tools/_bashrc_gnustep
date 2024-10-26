@@ -3,6 +3,8 @@
 initfile=/usr/local/share/GNUstep/Makefiles/GNUstep.sh
 if [ -f "$initfile" ]; then
   . "$initfile"
+  alias clang-objc="clang $(gnustep-config --objc-flags) $(gnustep-config --objc-libs) -fobjc-arc -lobjc -ldispatch -lgnustep-base"
+  alias clang-objc-ast="clang -x objective-c -Xclang -ast-dump=json -fsyntax-only $(gnustep-config --objc-flags) -fobjc-arc "
 fi
 
 path1="${HOME}/Documents/github/kenjirofukuda/sandbox/bootstrap"
@@ -17,5 +19,3 @@ fi
 
 export PATH
 
-alias clang-objc="clang $(gnustep-config --objc-flags) $(gnustep-config --objc-libs) -fobjc-arc -lobjc -ldispatch -lgnustep-base"
-alias clang-objc-ast="clang -x objective-c -Xclang -ast-dump=json -fsyntax-only $(gnustep-config --objc-flags) -fobjc-arc "
