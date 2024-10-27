@@ -44,6 +44,8 @@ if [ $NIX_ID = "bsd" ]; then
 else
   ensure_cmd ag silversearcher-ag
 fi
+# for compile vterm
+$INSTALL_CMD libtool
 
 #other
 ensure_cmd locate plocate

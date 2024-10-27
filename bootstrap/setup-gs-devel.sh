@@ -2,11 +2,14 @@
 
 . "$(dirname $0)/common.sh"
 
+$INSTALL_CMD "latex2html"
+
 # kenjirofukuda
 ensure_repo "kenjirofukuda" "sandbox"
 ensure_repo "kenjirofukuda" "libs-gui"
 ensure_repo "kenjirofukuda" "libs-renaissance"
 ensure_repo "kenjirofukuda" "gdsfeel-gnustep"
+ensure_repo "kenjirofukuda" "gs-desktop"
 
 # swiftlang
 ensure_repo "swiftlang" "swift-corelibs-libdispatch"
