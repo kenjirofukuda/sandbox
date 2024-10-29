@@ -16,6 +16,6 @@ if [ $CNT -ge 1 ]; then
   exit 1
 fi
 sed -i -e 's/\s*$//' "$FILE"
-sed -i -e 's/OBJCFLAGS += \(.*\)$/& -fobjc-arc/g' "$FILE" 
+sed -i -e 's/OBJCFLAGS += \(.*\)$/& -fobjc-arc/g' "$FILE"
 echo "success"
 exit 0

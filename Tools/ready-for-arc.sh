@@ -87,5 +87,3 @@ do
   sed -i -E 's/\[\s*(.+)\s+dealloc\s*\]\s*;/RELAESE(\1); \/\/ dealloc -> RELEASE/g' "$path"
 done
 rm -rf $sources
-
-

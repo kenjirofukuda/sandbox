@@ -28,14 +28,14 @@ i_libdispatch () {
   "$debug" cmake .. -G Ninja \
            -DCMAKE_C_COMPILER=clang \
            -DCMAKE_CXX_COMPILER=clang++ \
-	         -DCMAKE_C_FLAGS=${C_FLAGS} \
-	         -DCMAKE_CXX_FLAGS=${C_FLAGS} \
+           -DCMAKE_C_FLAGS=${C_FLAGS} \
+           -DCMAKE_CXX_FLAGS=${C_FLAGS} \
            -DCMAKE_SKIP_RPATH=ON \
            -DCMAKE_BUILD_TYPE=Release \
            -DINSTALL_PRIVATE_HEADERS=YES
 
   "$debug" ninja
-  "$debug" sudo -E ninja install  
+  "$debug" sudo -E ninja install
   "$debug" sudo ldconfig
 }
 
@@ -44,7 +44,7 @@ i_tools-make () {
   local debug=my_echo
   local l_repo=$(local_repo gnustep tools-make)
   "$debug" cd "$l_repo"
-  
+
   "$debug" ./configure \
            CC=clang \
            CXX=clang++ \
@@ -81,7 +81,7 @@ EOF
   "$debug" cd _build
 
   "$debug" cmake .. -C "$cmakef"
-  "$debug" make -j$(nproc)  
+  "$debug" make -j$(nproc)
   "$debug" sudo -E make install
   "$debug" sudo ldconfig
 }
@@ -101,7 +101,7 @@ i_libs-base () {
            libicu-dev \
            libicu74
 
-  "$debug" cd "$l_repo"  
+  "$debug" cd "$l_repo"
   "$debug" sudo ldconfig
   CPPFLAGS="$(pkg-config icu-i18n --cflags)"
   ICU_CFLAGS="$(pkg-config icu-i18n --cflags)"
@@ -133,9 +133,9 @@ i_libs-gui () {
            libcups2-dev \
            libicns-dev \
            libpocketsphinx-dev \
-           libsphinxbase-dev 
-  
-  "$debug" cd "$l_repo"  
+           libsphinxbase-dev
+
+  "$debug" cd "$l_repo"
   "$debug" sudo ldconfig
   "$debug" ./configure
   "$debug" make -j$(nproc)
@@ -164,8 +164,8 @@ i_libs-back () {
            libcups2-dev \
            libicns-dev \
            libpocketsphinx-dev \
-           libsphinxbase-dev 
-  
+           libsphinxbase-dev
+
   "$debug" cd "$l_repo"
   for kind in xlib art cairo
   do

@@ -1,5 +1,5 @@
 #!/bin/bash
- 
+
 script="$(dirname $0)/_reformat.sh"
 
 if [ ! -f "$script" ]; then

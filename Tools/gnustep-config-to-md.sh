@@ -12,9 +12,9 @@ print_key() {
 }
 
 key_gen() {
-  for each2 in SYSTEM NETWORK LOCAL USER 
+  for each2 in SYSTEM NETWORK LOCAL USER
   do
-    echo $each2	  
+    echo $each2
     for each1 in APPS TOOLS LIBRARY HEADERS LIBRARIES DOC DOC_MAN DOC_INFO
     do
       echo "GNUSTEP_${each2}_${each1}"
@@ -66,7 +66,7 @@ do
     echo "### Doamin($key)"
     echo ""
     print_table_header
-  fi	
+  fi
 done
 
 print_flags "--debug-flags"
@@ -77,7 +77,7 @@ print_flags "--gui-libs"
 print_flags "--host-dir"
 print_flags "--host-ldir"
 
-for domain in SYSTEM NETWORK LOCAL USER 
+for domain in SYSTEM NETWORK LOCAL USER
 do
   print_flags "--installation-domain-for=${domain}"
   print_flags "--target-dir-for=${domain}"

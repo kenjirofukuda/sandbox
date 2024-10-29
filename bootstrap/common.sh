@@ -48,7 +48,7 @@ ensure_repo () {
     "$debug" git fetch
     local src=$(git branch | grep '^*' | awk '{print $NF}')
     local dst=$(git branch --remote | grep  'HEAD' | awk '{print $NF}')
-    "$debug" git diff "$src" "$dst" 
+    "$debug" git diff "$src" "$dst"
   else
     "$debug" cd "$my_base"
     "$debug" git clone "$remote_repo"

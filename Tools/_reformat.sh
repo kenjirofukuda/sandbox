@@ -1,5 +1,5 @@
 #!/bin/bash
- 
+
 astyle_options="$(dirname $0)/_astyle_gnustep"
 script="$(dirname $0)/post_reformat.awk"
 

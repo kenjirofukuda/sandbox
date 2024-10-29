@@ -13,6 +13,6 @@ basename="prefs-$(hostname)-${time_id}"
 archive="/tmp/${basename}.zip"
 cd "$fullpath"
 rm -rf "$archive"
-zip -q -r "$archive" . -i *.plist 
+zip -q -r "$archive" . -i *.plist
 cd "$OLD_CWD"
 echo "$archive"
