@@ -24,6 +24,16 @@ my_echo () {
 }
 
 
+
+local_repo () {
+  local owner=$1
+  local repo=$2
+  local my_base="${HOME}/Documents/github/${owner}"
+  local my_repo="${my_base}/${repo}"
+  echo "$my_repo"
+}
+
+
 ensure_repo () {
   local owner=$1
   local repo=$2

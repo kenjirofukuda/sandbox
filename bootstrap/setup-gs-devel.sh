@@ -8,6 +8,7 @@ $INSTALL_CMD "latex2html"
 ensure_repo "kenjirofukuda" "sandbox"
 ensure_repo "kenjirofukuda" "libs-gui"
 ensure_repo "kenjirofukuda" "libs-renaissance"
+ensure_repo "kenjirofukuda" "gnustep-examples"
 ensure_repo "kenjirofukuda" "gdsfeel-gnustep"
 ensure_repo "kenjirofukuda" "gs-desktop"
 
