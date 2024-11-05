@@ -179,6 +179,44 @@ i_libs-back () {
 }
 
 
+i_libs_corebase () {
+  local debug=my_echo
+  local l_repo=$(local_repo gnustep libs-corebase)
+  "$debug" cd "$l_repo"
+  "$debug" ./configure \
+           CC=clang \
+           OBJC=clang \
+           CPPFLAGS=\"$(gnustep-config --objc-flags)\" \
+           CFLAGS=\"$(gnustep-config --objc-flags)\"
+  "$debug" make -j$(nproc)
+  "$debug" sudo -E make install
+}
+
+
+i_libs_opal () {
+  local debug=my_echo
+  local l_repo=$(local_repo "kenjirofukuda" libs-opal)
+  "$debug" "$INSTALL_CMD" \
+           libfontconfig-dev \
+           libcairo2-dev \
+           liblcms2-dev \
+           libjpeg-turbo8-dev \
+           libtiff-dev
+  "$debug" cd "$l_repo"
+  "$debug" make -j$(nproc)
+  "$debug" sudo -E make install
+}
+
+
+i_libs_quartzcore () {
+  local debug=my_echo
+  local l_repo=$(local_repo gnustep libs-quartzcore)
+  "$debug" cd "$l_repo"
+  "$debug" make -j$(nproc)
+  "$debug" sudo -E make install
+}
+
+
 i_init_file () {
   INIT_PATH=$(init_path "$INSTALL_LAYOUT")
   cat <<EOF2 >> ~/.bashrc
@@ -206,6 +244,7 @@ i_all () {
   i_libs-base
   i_libs-gui
   i_libs-back
+  i_libs_corebase
 }
 
 t_all () {
@@ -216,3 +255,5 @@ t_all () {
 if [[ 0 -eq $(grep -c -e '^init_file' ~/.bashrc) ]]; then
   i_init_file
 fi
+
+i_libs_quartzcore
