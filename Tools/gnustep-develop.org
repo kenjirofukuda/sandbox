@@ -1,0 +1,4 @@
+#+TITLE: GNUstep 開発ノート
+* lldb デバッグに関するヒント
+- https://github.com/realgud/realgud
+- https://gist.github.com/ryanchang/a2f738f0c3cc6fbd71fa

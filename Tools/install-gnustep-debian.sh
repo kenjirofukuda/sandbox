@@ -8,6 +8,8 @@ set -e
 INSTALL_LAYOUT=gnustep
 
 
+code_name=$(grep VERSION_CODENAME /etc/os-release | awk -F= '{print $2}')
+
 i_libdispatch () {
   local debug=my_echo
   local l_repo=$(local_repo swiftlang swift-corelibs-libdispatch)
@@ -98,8 +100,13 @@ i_libs-base () {
            libxslt1.1 \
            libxslt-dev \
            icu-devtools \
-           libicu-dev \
-           libicu74
+           libicu-dev
+  if [ "$code_name" = "jammy" ]; then
+    "$debug" "$INSTALL_CMD" libicu70
+  else
+    "$debug" "$INSTALL_CMD" libicu74
+  fi
+
 
   "$debug" cd "$l_repo"
   "$debug" sudo ldconfig
@@ -123,7 +130,8 @@ t_libs-base () {
 
 i_libs-gui () {
   local debug=my_echo
-  local l_repo=$(local_repo gnustep libs-gui)
+  # local l_repo=$(local_repo gnustep libs-gui)
+  local l_repo=$(local_repo kenjirofukuda libs-gui)
 
   "$debug" "$INSTALL_CMD" \
            libao4 \
@@ -256,4 +264,6 @@ if [[ 0 -eq $(grep -c -e '^init_file' ~/.bashrc) ]]; then
   i_init_file
 fi
 
-i_libs_quartzcore
+#i_libs_quartzcore
+i_all
+t_all
