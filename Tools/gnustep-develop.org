@@ -2,3 +2,13 @@
 * lldb デバッグに関するヒント
 - https://github.com/realgud/realgud
 - https://gist.github.com/ryanchang/a2f738f0c3cc6fbd71fa
+* nfont
+GSDEを扱っていて日本語が全く使えないことに気が付き、試しにNotoフォントをインストールしてみたが全く反映されない。
+GSDEはnextspaceを使用しているため、gnustep-backend がartを使用している。このartが=nfont=形式を採用している。
+nfontに関する情報はインターネット上には少なく、以下を参照している。
+- https://github.com/esteve/mknfonts.tool
+- file:///home/kenjiro/Documents/github/trunkmaster/nextspace/Documentation/Developer/FontPackages.md
+
+* 無関係
+ここは執筆中に本テーマに無関係なことを思いついたときに記述する場所である。
+** TODO githubのリンク上であるキーを押したら自動的にcloneする
