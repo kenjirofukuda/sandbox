@@ -35,6 +35,9 @@ else
   ensure_cmd ninja ninja-build
 fi
 ensure_cmd cmake
+# for commapile vterm C library
+ensure_cmd libtool
+ensure_cmd libtool-bin
 
 # editor
 ensure_cmd vim

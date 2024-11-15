@@ -11,6 +11,7 @@ ensure_repo "kenjirofukuda" "libs-renaissance"
 ensure_repo "kenjirofukuda" "gnustep-examples"
 ensure_repo "kenjirofukuda" "gdsfeel-gnustep"
 ensure_repo "kenjirofukuda" "gs-desktop"
+ensure_repo "kenjirofukuda" "mknfonts.tool"
 
 # swiftlang
 ensure_repo "swiftlang" "swift-corelibs-libdispatch"
