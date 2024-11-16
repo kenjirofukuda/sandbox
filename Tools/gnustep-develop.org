@@ -8,7 +8,7 @@ GSDEはnextspaceを使用しているため、gnustep-backend がartを使用し
 nfontに関する情報はインターネット上には少なく、以下を参照している。
 - https://github.com/esteve/mknfonts.tool
 - file:///home/kenjiro/Documents/github/trunkmaster/nextspace/Documentation/Developer/FontPackages.md
-H
+
 * リポジトリの自動更新
 #+begin_src elisp :results list
     (file-name-split
