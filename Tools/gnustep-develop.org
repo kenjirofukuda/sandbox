@@ -8,7 +8,95 @@ GSDEはnextspaceを使用しているため、gnustep-backend がartを使用し
 nfontに関する情報はインターネット上には少なく、以下を参照している。
 - https://github.com/esteve/mknfonts.tool
 - file:///home/kenjiro/Documents/github/trunkmaster/nextspace/Documentation/Developer/FontPackages.md
+H
+* リポジトリの自動更新
+#+begin_src elisp :results list
+    (file-name-split
+     "~/Documents/github/dylan-lang/opendylan/documentation/sphinx-extensions/.git")
+#+end_src
+
+#+RESULTS:
+- ~
+- Documents
+- github
+- dylan-lang
+- opendylan
+- documentation
+- sphinx-extensions
+- .git
+
+#+begin_src elisp :results list
+  (defun top-repo-p (dir)
+    (let* ((items (file-name-split dir))
+           (repo-name (nth 4 items)))
+      (and (<= 6 (length items))
+           (not (string-prefix-p "_" repo-name)))))
+
+  (defun find-repos (topdir)
+    (mapcar 'file-name-directory
+            (directory-files-recursively topdir
+                                         "\\.git$"
+                                         t
+                                         (lambda (dir) (not (top-repo-p dir))))))
+
+  (find-repos "~/Documents/github")
+  #+end_src
+
+#+RESULTS:
+- ~/Documents/github/AgoraDesktop/AgoraInstaller/
+- ~/Documents/github/Bogdanp/racket-gui-easy/
+- ~/Documents/github/JuliaInterop/libcxxwrap-julia/
+- ~/Documents/github/SquareBracketAssociates/BuildingApplicationWithSpec2/
+- ~/Documents/github/apple/swift-corelibs-libdispatch/
+- ~/Documents/github/chrisballinger/powerplant/
+- ~/Documents/github/dylan-lang/dylan-emacs-support/
+- ~/Documents/github/dylan-lang/opendylan/
+- ~/Documents/github/etoile/Etoile/
+- ~/Documents/github/fniessen/org-macros/
+- ~/Documents/github/gnustep/apps-gorm/
+- ~/Documents/github/gnustep/apps-gworkspace/
+- ~/Documents/github/gnustep/apps-projectcenter/
+- ~/Documents/github/gnustep/apps-systempreferences/
+- ~/Documents/github/gnustep/gap/
+- ~/Documents/github/gnustep/libobjc2/
+- ~/Documents/github/gnustep/libs-back/
+- ~/Documents/github/gnustep/libs-base/
+- ~/Documents/github/gnustep/libs-corebase/
+- ~/Documents/github/gnustep/libs-gui/
+- ~/Documents/github/gnustep/libs-opal/
+- ~/Documents/github/gnustep/libs-quartzcore/
+- ~/Documents/github/gnustep/libs-renaissance/
+- ~/Documents/github/gnustep/libs-ruby/
+- ~/Documents/github/gnustep/tests-examples/
+- ~/Documents/github/gnustep/tools-make/
+- ~/Documents/github/kenjirofukuda/Mousetrap.jl/
+- ~/Documents/github/kenjirofukuda/_hiki/
+- ~/Documents/github/kenjirofukuda/apps-projectcenter/
+- ~/Documents/github/kenjirofukuda/cl-sandbox/
+- ~/Documents/github/kenjirofukuda/gdsfeel-gnustep/
+- ~/Documents/github/kenjirofukuda/gnustep-examples/
+- ~/Documents/github/kenjirofukuda/gs-desktop/
+- ~/Documents/github/kenjirofukuda/libs-base/
+- ~/Documents/github/kenjirofukuda/libs-gui/
+- ~/Documents/github/kenjirofukuda/libs-renaissance/
+- ~/Documents/github/kenjirofukuda/mknfonts.tool/
+- ~/Documents/github/kenjirofukuda/mousetrap/
+- ~/Documents/github/kenjirofukuda/mousetrap_julia_binding/
+- ~/Documents/github/kenjirofukuda/sandbox/
+- ~/Documents/github/kenjirofukuda/tests-examples/
+- ~/Documents/github/lem-project/lem/
+- ~/Documents/github/lszl84/wx_cmake_template/
+- ~/Documents/github/minivmac/
+- ~/Documents/github/onflapp/gs-desktop/
+- ~/Documents/github/protocolbuffers/protobuf/
+- ~/Documents/github/racket/
+- ~/Documents/github/racket/drracket/
+- ~/Documents/github/rizsotto/Bear/
+- ~/Documents/github/roswell/
+- ~/Documents/github/sezanzeb/input-remapper/
+- ~/Documents/github/swiftlang/swift-corelibs-libdispatch/
+- ~/Documents/github/trunkmaster/nextspace/
 
 * 無関係
 ここは執筆中に本テーマに無関係なことを思いついたときに記述する場所である。
-** TODO githubのリンク上であるキーを押したら自動的にcloneする
+** TODO githubのリンク上であるキーを押したら自動的にpullする

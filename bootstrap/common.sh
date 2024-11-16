@@ -34,6 +34,15 @@ local_repo () {
 }
 
 
+diff_repo () {
+  local debug="my_echo"
+  "$debug" git fetch
+  local src=$(git branch | grep '^*' | awk '{print $NF}')
+  local dst=$(git branch --remote | grep  'HEAD' | awk '{print $NF}')
+  "$debug" git diff "$src" "$dst"
+}
+
+
 ensure_repo () {
   local owner=$1
   local repo=$2
@@ -45,10 +54,7 @@ ensure_repo () {
   "$debug" mkdir -p "$my_base"
   if [ -d "$my_repo" ]; then
     "$debug" cd "$my_repo"
-    "$debug" git fetch
-    local src=$(git branch | grep '^*' | awk '{print $NF}')
-    local dst=$(git branch --remote | grep  'HEAD' | awk '{print $NF}')
-    "$debug" git diff "$src" "$dst"
+    diff_repo
   else
     "$debug" cd "$my_base"
     "$debug" git clone "$remote_repo"
