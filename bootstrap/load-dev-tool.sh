@@ -34,14 +34,14 @@ else
   ensure_cmd make build-essential
   ensure_cmd ninja ninja-build
 fi
-ensure_cmd cmake
+# ensure_cmd cmake
 # for commapile vterm C library
 ensure_cmd libtool
 ensure_cmd libtool-bin
 
 # editor
 ensure_cmd vim
-ensure_cmd emacs
+# ensure_cmd emacs
 if [ $NIX_ID = "bsd" ]; then
   ensure_cmd ag the_silver_searcher
 else
