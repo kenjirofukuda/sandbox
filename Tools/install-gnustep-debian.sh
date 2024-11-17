@@ -30,8 +30,8 @@ i_libdispatch () {
   "$debug" cmake .. -G Ninja \
            -DCMAKE_C_COMPILER=clang \
            -DCMAKE_CXX_COMPILER=clang++ \
-           -DCMAKE_C_FLAGS=${C_FLAGS} \
-           -DCMAKE_CXX_FLAGS=${C_FLAGS} \
+           -DCMAKE_C_FLAGS="${C_FLAGS}" \
+           -DCMAKE_CXX_FLAGS="${C_FLAGS}" \
            -DCMAKE_SKIP_RPATH=ON \
            -DCMAKE_BUILD_TYPE=Release \
            -DINSTALL_PRIVATE_HEADERS=YES
