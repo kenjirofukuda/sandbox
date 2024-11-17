@@ -1,0 +1,81 @@
+    1  sudo apt -y install virtualbox-guest-additions-iso
+    2  sudo apt -y install git gh
+    3  gh auth login
+    4  mkdir -p ~/Documents/github/kenjirofukuda
+    5  cd ~/Documents/github/kenjirofukuda
+    6  git clone "https://github.com/kenjirofukuda/sandbox.git"
+    7  ~/Documents/github/kenjirofukuda/sandbox/bootstrap/load-dev-tool.sh
+    8  which emacs
+    9  cd sandbox/
+   10  git pull
+   11  cd bootstrap/
+   12  ./load-dev-tool.sh
+   13  which emacs
+   14  snap install emacs --classic
+   15  which emacs
+   16  ls /snap/bin/emacs
+   17  vi ~/.bashrc
+   18  emacs --version
+   19  emacs -nw
+   20  cd ~/Documents/github/kenjirofukuda/sandbox/bootstrap/
+   21  ls
+   22  ./setup-jp-env.sh
+   23  vi setup-jp-env.sh
+   24  ./setup-jp-env.sh
+   25  ps ax | grep mozc
+   26  ls ~/Documents/github/kenjirofukuda/
+   27  ls ~/Documents/github/kenjirofukuda/sandbox/
+   28  pushd  ~/Documents/github/kenjirofukuda/sandbox/bootstrap/
+   29  vi setup-jp-env.sh
+   30  cat /etc/os-release | grep -e '^id=' | awk -F= '{print $NF}'
+   31  cat /etc/os-release | grep  'id=' | awk -F= '{print $NF}'
+   32  cat /etc/os-release
+   33  cat /etc/os-release | grep -e '^ID=' | awk -F= '{print $NF}'
+   34  vi setup-jp-env.sh
+   35  ./setup-jp-env.sh
+   36  pushd  ~/Documents/github/kenjirofukuda/sandbox/bootstrap/
+   37  ./setup-jp-env.sh
+   38  pushd  ~/Documents/github/kenjirofukuda/sandbox/bootstrap/
+   39  ./setup-jp-env.sh
+   40  vi ~/.config/mozc/ibus_config.textproto
+   41  vi ./setup-jp-env.sh
+   42  grep -c active_on_launch ~/.config/mozc/ibus_config.textproto
+   43  vi ./setup-jp-env.sh
+   46  grep active_on_launch ~/.config/mozc/ibus_config.textproto |  awk '{print $NF}'
+   47  vi ./setup-jp-env.sh
+   48  ./setup-jp-env.sh
+   49  vi ~/.config/mozc/ibus_config.textproto
+   50  systemcntl status ibus
+   51  systemctl status ibus
+   52  ifconfig
+   53  ./setup-gs-devel.sh
+   54  cd ../Tools/
+   55  ./install-gnustep-debian.sh
+   56  which clang
+   57  which clang++
+   58  clang --version
+   59  clang++ --version
+   60  cd ../
+   61  ls
+   62  cd ../
+   63  cd too
+   64  sudo updatedb
+   65  locate GNUstep.sh
+   66  env | grep GNU
+   67  ./install-gnustep-debian.sh
+   68  pushd ../../../swiftlang/swift-corelibs-libdispatch/
+   69  less INSTALL.md
+   70  ls
+   75  git pull 9566a131de09a472790f7b69ae661326cdedf306
+   76  ~/Documents/github/kenjirofukuda/sandbox/Tools/install-gnustep-debian.sh
+   93  git config --global user.email "kenjirofukuda@gmail.com"
+   95  git config --global user.name "Kenjiro Fukuda"
+  108  cd ~/Documents/github/swiftlang/swift-corelibs-libdispatch/
+  109  ~/Documents/github/kenjirofukuda/sandbox/Tools/dispatch-build.sh
+  124  sudo ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /usr/lib/x86_64-linux-gnu/libstdc++.so
+  145  sudo apt install libstdc++-14-dev
+  155  sudo apt install libfreetype6-dev
+  156  sudo apt install libfreetype6
+  158  locate debian.txt
+  159  diff /home/kenjiro/Documents/github/onflapp/gs-desktop/dependencies/debian.txt /home/kenjiro/Documents/github/kenjirofukuda/gs-desktop/dependencies/debian.txt
+  163  for f in $(cat /home/kenjiro/Documents/github/onflapp/gs-desktop/dependencies/debian.txt ) ;do sudo apt -y install  $f; done

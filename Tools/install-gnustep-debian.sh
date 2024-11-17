@@ -252,7 +252,7 @@ i_all () {
   i_libs-base
   i_libs-gui
   i_libs-back
-  i_libs_corebase
+#  i_libs_corebase
 }
 
 t_all () {

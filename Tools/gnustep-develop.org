@@ -9,6 +9,14 @@ nfontに関する情報はインターネット上には少なく、以下を参
 - https://github.com/esteve/mknfonts.tool
 - file:///home/kenjiro/Documents/github/trunkmaster/nextspace/Documentation/Developer/FontPackages.md
 
+* プレーンな24.04 LTS にいれて確認したこと
+** 続行不可能なエラー
+- libdispatch: c++ヘッダーやライブラリを認識できていない
+- libs-back: x11 で基本的なヘッダーやライブラリが全く入っていない
+- libscorebase: objc_getClassがないとか言って､libobjc2がインストールされていないかのような終了の仕方をする｡
+上記２つは基本的にライブラリのインストール不足､gs-desktopリポジトリ内のdebian.txtのすべてのコンポーネントを入れたらうまく行った｡
+corebaseは放置プロジェクトなので､ついてこれないのもわかる気がする標準インストールからは除外することにする｡
+
 * リポジトリの自動更新
 #+begin_src elisp :results list
     (file-name-split
