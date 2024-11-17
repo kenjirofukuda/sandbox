@@ -52,4 +52,6 @@ $INSTALL_CMD libtool
 
 #other
 ensure_cmd locate plocate
+ensure_cmd ifconfig net-tools
 install_vimrc
+"$(dirname $0)/setup-emacs.sh"

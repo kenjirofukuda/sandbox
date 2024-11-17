@@ -6,7 +6,7 @@
 if [ ! -f /usr/lib/mozc/mozc_server ]; then
   echo "Now install Japanese environment"
   if  [ -f /etc/os-release ]; then
-    id=$(cat /etc/os-release/ | grep -e '^id=' | awk -F= '{print $NF}')
+    id=$(cat /etc/os-release | grep -e '^ID=' | awk -F= '{print $NF}')
     if [ "$id" = "ubuntu" ]; then
       sudo wget https://www.ubuntulinux.jp/sources.list.d/noble.sources -O /etc/apt/sources.list.d/ubuntu-ja.sources
       sudo apt -U upgrade
@@ -22,7 +22,7 @@ if [ -f ~/.config/mozc/ibus_config.textproto ]; then
   reply=$(grep -c active_on_launch ~/.config/mozc/ibus_config.textproto)
   if [ "$reply" -gt 0 ]; then
     reply=$(grep active_on_launch ~/.config/mozc/ibus_config.textproto | \
-              awk -F '{print $NF}')
+              awk '{print $NF}')
     echo "$reply"
     echo "TODO: needs replace to active_on_launch: True"
   fi
