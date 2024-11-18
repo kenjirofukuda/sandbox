@@ -25,7 +25,7 @@ fi
 echo "===== Done Iosevka fonts for Emacs  ====="
 echo ""
 
-
+sudo apt install -y libtool libtool-bin
 echo "===== Start install CMake ====="
 reply=$(which cmake || echo "not found")
 if [ "$reply" = "not found" ]; then
