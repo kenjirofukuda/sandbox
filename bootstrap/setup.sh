@@ -39,3 +39,5 @@ done
 "$(dirname $0)/setup-jp-env.sh"
 
 "$(dirname $0)/setup-emacs.sh"
+
+"$(dirname $0)/load-dev-tool.sh"

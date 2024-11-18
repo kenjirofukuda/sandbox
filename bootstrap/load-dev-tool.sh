@@ -36,8 +36,6 @@ else
 fi
 # ensure_cmd cmake
 # for commapile vterm C library
-ensure_cmd libtool
-ensure_cmd libtool-bin
 
 # editor
 ensure_cmd vim
@@ -49,6 +47,7 @@ else
 fi
 # for compile vterm
 $INSTALL_CMD libtool
+$INSTALL_CMD libtool-bin
 
 #other
 ensure_cmd locate plocate

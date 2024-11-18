@@ -57,8 +57,12 @@
   "$(dirname $0)/setup-jp-env.sh"
 #+end_src
 
-
 * Emacs
 #+begin_src sh :tangle yes
   "$(dirname $0)/setup-emacs.sh"
+#+end_src
+
+* 開発ツール
+#+begin_src sh :tangle yes
+  "$(dirname $0)/load-dev-tool.sh"
 #+end_src
