@@ -21,7 +21,7 @@ while [ -z "${reply}" ]; do
     if [ ! -z "$reply" ]; then
         read -p "${reply}: ok? (y/N):" yn
         case "$yn" in [yY]*) ;; *) reply="" ; continue ;; esac
-        $debug git config --global user.email "$user_name"
+        $debug git config --global user.name "$user_name"
     fi
 done
 

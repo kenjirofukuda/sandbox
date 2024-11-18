@@ -6,6 +6,7 @@
 
 install_iosevka () {
   echo "===== Downloading fonts... ====="
+  ensure_cmd curl
   saved_pwd=$(pwd)
   my_echo mkdir -p ~/Downloads
   my_echo cd ~/Downloads
