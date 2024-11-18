@@ -353,6 +353,26 @@ i_libs_quartzcore () {
 }
 
 
+i_libs_renaissance () {
+  local component="libs-renaissance"
+  local done_file="${HOME}/.config/_gnustep/${component}.done"
+  if [ -f "$done_file" ]; then
+    echo "===== ${component} already installed. ====="
+    return 0
+  fi
+
+  echo "===== Start install ${component} ====="
+  local debug=my_echo
+  local l_repo=$(local_repo kenjirofukuda libs-renaissance)
+  "$debug" cd "$l_repo"
+  "$debug" make -j$(nproc)
+  "$debug" sudo -E make install
+  touch "$done_file"
+  echo "===== End install ${component} ====="
+  echo ""
+}
+
+
 i_init_file () {
   INIT_PATH=$(init_path "$INSTALL_LAYOUT")
   cat <<EOF2 >> ~/.bashrc
@@ -380,6 +400,7 @@ i_all () {
   i_libs-base
   i_libs-gui
   i_libs-back
+  i_libs_renaissance
 #  i_libs_corebase
 }
 
