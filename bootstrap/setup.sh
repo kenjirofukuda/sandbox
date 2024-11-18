@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname $0)/common.sh"
 debug=my_echo
-set -e
+# set -e
 
 # https://stackoverflow.com/questions/369758/how-to-trim-whitespace-from-a-bash-variable
 trim() {

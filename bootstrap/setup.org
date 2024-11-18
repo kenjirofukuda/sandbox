@@ -6,7 +6,7 @@
   #!/usr/bin/env sh
   . "$(dirname $0)/common.sh"
   debug=my_echo
-  set -e
+  # set -e
 #+end_src
 
 * trim 関数

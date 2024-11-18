@@ -58,7 +58,7 @@ if [ -d "${target}" ]; then
   fi
   ln -s "${source_dir}" "${target}"
 else
-  echo "ERROR: target is not directory"
+  ln -s "${source_dir}" "${target}"
 fi
 echo "===== Done setup  ~/.emacs.d ====="
 echo ""
