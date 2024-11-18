@@ -1,0 +1,64 @@
+#+TITLE: setup
+#+PROPERTY: tangle "./setup.sh"
+#+PROPERTY: header-args:conf :tangle-mode (identity #o755)
+* 共通ライブラリの読み込み
+#+begin_src sh :tangle yes
+  #!/usr/bin/env sh
+  . "$(dirname $0)/common.sh"
+  debug=my_echo
+  set -e
+#+end_src
+
+* trim 関数
+#+begin_src sh :tangle yes
+  # https://stackoverflow.com/questions/369758/how-to-trim-whitespace-from-a-bash-variable
+  trim() {
+      local var="$*"
+      # remove leading whitespace characters
+      var="${var#"${var%%[![:space:]]*}"}"
+      # remove trailing whitespace characters
+      var="${var%"${var##*[![:space:]]}"}"
+      printf '%s' "$var"
+  }
+#+end_src
+
+
+* gitを確定
+何はともあれ、git がなければ始まりようがない。
+#+begin_src sh :tangle yes
+  ensure_cmd git
+  reply=$(git config --global user.name)
+  while [ -z "${reply}" ]; do
+      read -p "Enter user name: " user_name
+      reply="$(trim $user_name)"
+      if [ ! -z "$reply" ]; then
+          read -p "${reply}: ok? (y/N):" yn
+          case "$yn" in [yY]*) ;; *) reply="" ; continue ;; esac
+          $debug git config --global user.email "$user_name"
+      fi
+  done
+
+  reply=$(git config --global user.email)
+  while [ -z "${reply}" ]; do
+      read -p "Enter email address: " email_addr
+      reply="$(trim $email_addr)"
+      if [ ! -z "$reply" ]; then
+          read -p "${reply}: ok? (y/N):" yn
+          case "$yn" in [yY]*) ;; *) reply="" ; continue ;; esac
+          $debug git config --global user.email "$email_addr"
+      fi
+  done
+#+end_src
+
+#+RESULTS:
+
+* 日本語環境
+#+begin_src sh :tangle=yes
+  "$(dirname $0)/setup-jp-env.sh"
+#+end_src
+
+
+* Emacs
+#+begin_src sh :tangle yes
+  "$(dirname $0)/setup-emacs.sh"
+#+end_src
