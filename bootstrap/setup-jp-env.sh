@@ -28,7 +28,9 @@ if [ -f "${proto_file}" ]; then
   if [ "$reply" -gt 0 ]; then
     reply=$(grep active_on_launch "${proto_file}" | awk '{print $NF}')
     if [ "$reply" = "False" ]; then
-      sed -i 's/: False/: True/' "${proto_file}"
+      sed -i 's/ False/ True/' "${proto_file}"
+      ibus write-cache
+      ibus restart
     else
       echo "Already done settings"
     fi
