@@ -26,6 +26,20 @@ echo "===== Done Iosevka fonts for Emacs  ====="
 echo ""
 
 
+echo "===== Start install CMake ====="
+reply=$(which cmake || echo "not found")
+if [ "$reply" = "not found" ]; then
+  if [ -d /snap ]; then
+    snap install cmake --classic
+  else
+    sudo apt -y instatll cmake
+  fi
+else
+  echo "CMake already installed."
+fi
+echo "===== Done install CMake ====="
+echo ""
+
 echo "===== Start install Emacs ====="
 reply=$(which emacs || echo "not found")
 if [ "$reply" = "not found" ]; then
