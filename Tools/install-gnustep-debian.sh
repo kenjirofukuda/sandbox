@@ -262,7 +262,9 @@ i_libs-back () {
            libcups2-dev \
            libicns-dev \
            libpocketsphinx-dev \
-           libsphinxbase-dev
+           libsphinxbase-dev \
+           libfreetype6 \
+           libfreetype6-dev
 
   "$debug" cd "$l_repo"
   for kind in xlib art cairo
