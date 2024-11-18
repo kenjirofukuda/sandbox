@@ -5,12 +5,39 @@
 
 set -e
 
+"$(dirname $0)/install-dependencies-debian.sh"
+
+"$(dirname $0)/setup-gs-devel.sh"
+
+
 INSTALL_LAYOUT=gnustep
 
+mkdir -p "${HOME}/.config/_gnustep/${component}.done"
+
+
+echo "===== Start Fix: stdc++ not found ====="
+libstdcpp="/usr/lib/$(gcc -dumpmachine)/libstdc++.so"
+if [ ! -f "$libstdcpp" ]; then
+  for n in 14 13 12 11 10 9 8 7 6 5 4 3 2 1; do
+    if [ -f "${libstdcpp}.${n}" ]; then
+      sudo ln -s "${libstdcpp}.${n}" "${libstdcpp}"
+    fi
+  done
+fi
+echo "===== Done Fix: stdc++ not found ====="
+echo ""
 
 code_name=$(grep VERSION_CODENAME /etc/os-release | awk -F= '{print $2}')
 
 i_libdispatch () {
+  local component="libdispatch"
+  local done_file="${HOME}/.config/_gnustep/${component}.done"
+  if [ -f "$done_file" ]; then
+    echo "===== ${component} already installed. ====="
+    return 0
+  fi
+
+  echo "===== Start install ${component} ====="
   local debug=my_echo
   local l_repo=$(local_repo swiftlang swift-corelibs-libdispatch)
   "$debug" cd "$l_repo"
@@ -39,10 +66,21 @@ i_libdispatch () {
   "$debug" ninja
   "$debug" sudo -E ninja install
   "$debug" sudo ldconfig
+  touch "$done_file"
+  echo "===== End install ${component} ====="
+  echo ""
 }
 
 
 i_tools-make () {
+  local component="tools-make"
+  local done_file="${HOME}/.config/_gnustep/${component}.done"
+  if [ -f "$done_file" ]; then
+    echo "===== ${component} already installed. ====="
+    return 0
+  fi
+
+  echo "===== Start install ${component} ====="
   local debug=my_echo
   local l_repo=$(local_repo gnustep tools-make)
   "$debug" cd "$l_repo"
@@ -59,10 +97,21 @@ i_tools-make () {
 
   "$debug" make -j$(nproc)
   "$debug" sudo -E make install
+  touch "$done_file"
+  echo "===== End install ${component} ====="
+  echo ""
 }
 
 
 i_libobjc2 () {
+  local component="libobjc2"
+  local done_file="${HOME}/.config/_gnustep/${component}.done"
+  if [ -f "$done_file" ]; then
+    echo "===== ${component} already installed. ====="
+    return 0
+  fi
+
+  echo "===== Start install ${component} ====="
   local debug=my_echo
   local l_repo=$(local_repo gnustep libobjc2)
   "$debug" "$INSTALL_CMD" robin-map-dev
@@ -86,9 +135,20 @@ EOF
   "$debug" make -j$(nproc)
   "$debug" sudo -E make install
   "$debug" sudo ldconfig
+  touch "$done_file"
+  echo "===== End install ${component} ====="
+  echo ""
 }
 
 i_libs-base () {
+  local component="libs-base"
+  local done_file="${HOME}/.config/_gnustep/${component}.done"
+  if [ -f "$done_file" ]; then
+    echo "===== ${component} already installed. ====="
+    return 0
+  fi
+
+  echo "===== Start install ${component} ====="
   local debug=my_echo
   local l_repo=$(local_repo gnustep libs-base)
 
@@ -116,6 +176,9 @@ i_libs-base () {
   "$debug" ./configure
   "$debug" make -j$(nproc)
   "$debug" sudo -E make install
+  touch "$done_file"
+  echo "===== End install ${component} ====="
+  echo ""
 }
 
 
@@ -129,6 +192,14 @@ t_libs-base () {
 
 
 i_libs-gui () {
+  local component="libs-gui"
+  local done_file="${HOME}/.config/_gnustep/${component}.done"
+  if [ -f "$done_file" ]; then
+    echo "===== ${component} already installed. ====="
+    return 0
+  fi
+
+  echo "===== Start install ${component} ====="
   local debug=my_echo
   # local l_repo=$(local_repo gnustep libs-gui)
   local l_repo=$(local_repo kenjirofukuda libs-gui)
@@ -148,6 +219,9 @@ i_libs-gui () {
   "$debug" ./configure
   "$debug" make -j$(nproc)
   "$debug" sudo -E make install
+  touch "$done_file"
+  echo "===== End install ${component} ====="
+  echo ""
 }
 
 
@@ -161,6 +235,14 @@ t_libs-gui () {
 
 
 i_libs-back () {
+  local component="libs-back"
+  local done_file="${HOME}/.config/_gnustep/${component}.done"
+  if [ -f "$done_file" ]; then
+    echo "===== ${component} already installed. ====="
+    return 0
+  fi
+
+  echo "===== Start install ${component} ====="
   local debug=my_echo
   local l_repo=$(local_repo gnustep libs-back)
 
@@ -184,10 +266,21 @@ i_libs-back () {
   done
   "$debug" sudo ldconfig
   defaults write NSGlobalDomain GSBackend libgnustep-cairo
+  touch "$done_file"
+  echo "===== End install ${component} ====="
+  echo ""
 }
 
 
 i_libs_corebase () {
+  local component="libs-corebase"
+  local done_file="${HOME}/.config/_gnustep/${component}.done"
+  if [ -f "$done_file" ]; then
+    echo "===== ${component} already installed. ====="
+    return 0
+  fi
+
+  echo "===== Start install ${component} ====="
   local debug=my_echo
   local l_repo=$(local_repo gnustep libs-corebase)
   "$debug" cd "$l_repo"
@@ -198,10 +291,21 @@ i_libs_corebase () {
            CFLAGS=\"$(gnustep-config --objc-flags)\"
   "$debug" make -j$(nproc)
   "$debug" sudo -E make install
+  touch "$done_file"
+  echo "===== End install ${component} ====="
+  echo ""
 }
 
 
 i_libs_opal () {
+  local component="libs-opal"
+  local done_file="${HOME}/.config/_gnustep/${component}.done"
+  if [ -f "$done_file" ]; then
+    echo "===== ${component} already installed. ====="
+    return 0
+  fi
+
+  echo "===== Start install ${component} ====="
   local debug=my_echo
   local l_repo=$(local_repo "kenjirofukuda" libs-opal)
   "$debug" "$INSTALL_CMD" \
@@ -213,15 +317,29 @@ i_libs_opal () {
   "$debug" cd "$l_repo"
   "$debug" make -j$(nproc)
   "$debug" sudo -E make install
+  touch "$done_file"
+  echo "===== End install ${component} ====="
+  echo ""
 }
 
 
 i_libs_quartzcore () {
+  local component="libs-quartzcore"
+  local done_file="${HOME}/.config/_gnustep/${component}.done"
+  if [ -f "$done_file" ]; then
+    echo "===== ${component} already installed. ====="
+    return 0
+  fi
+
+  echo "===== Start install ${component} ====="
   local debug=my_echo
   local l_repo=$(local_repo gnustep libs-quartzcore)
   "$debug" cd "$l_repo"
   "$debug" make -j$(nproc)
   "$debug" sudo -E make install
+  touch "$done_file"
+  echo "===== End install ${component} ====="
+  echo ""
 }
 
 

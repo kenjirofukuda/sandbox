@@ -3,6 +3,7 @@
 . "$(dirname $0)/common.sh"
 
 # 日本語環境がなければインストール
+echo "===== Start install mozc ====="
 if [ ! -f /usr/lib/mozc/mozc_server ]; then
   echo "Now install Japanese environment"
   if  [ -f /etc/os-release ]; then
@@ -16,33 +17,47 @@ if [ ! -f /usr/lib/mozc/mozc_server ]; then
 else
   echo "Japanese environment already installed."
 fi
+echo "===== Done install mozc ====="
+echo ""
 
 # 日本語をデフォルトにする
-if [ -f ~/.config/mozc/ibus_config.textproto ]; then
-  reply=$(grep -c active_on_launch ~/.config/mozc/ibus_config.textproto)
+echo "===== Start Hiragana default ====="
+proto_file="${HOME}/.config/mozc/ibus_config.textproto"
+if [ -f "${proto_file}" ]; then
+  reply=$(grep -c active_on_launch "${proto_file}")
   if [ "$reply" -gt 0 ]; then
-    reply=$(grep active_on_launch ~/.config/mozc/ibus_config.textproto | \
-              awk '{print $NF}')
-    echo "$reply"
-    echo "TODO: needs replace to active_on_launch: True"
+    reply=$(grep active_on_launch "${proto_file}" | awk '{print $NF}')
+    if [ "$reply" = "False" ]; then
+      sed -i 's/: False/: True/' "${proto_file}"
+    else
+      echo "Already done settings"
+    fi
+  else
+    echo "Flag not found: active_on_launch"
   fi
+else
+  echo "File not found: ${proto_file}"
 fi
+echo "===== Done Hiragana default ====="
+echo ""
 
+# Alt + ` で変換できるようにする
 my_echo sudo apt -y install dbus-x11
-echo "===== Checking current keymapping ====="
-my_echo gsettings get org.gnome.desktop.wm.keybindings switch-group
-my_echo gsettings get org.gnome.desktop.wm.keybindings switch-input-source
-my_echo gsettings get org.gnome.desktop.wm.keybindings switch-input-source-backward
-echo
 
-echo "===== Replace keymapping ====="
-gsettings set org.gnome.desktop.wm.keybindings switch-group "['<Ctrl><Shift><Super>Above_Tab', '<Ctrl><Shift><Alt>Above_Tab']"
-gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['<Alt>grave']"
-gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "['<Shift><Alt>grave']"
-echo
+gnome_key_bind () {
+  local group="$1"
+  local value="$2"
+  local scheme="org.gnome.desktop.wm.keybindings"
+  local reply=$(gsettings get "$scheme" "$group")
+  if [ "$reply" != "$value" ]; then
+    gsettings set "$scheme" "$group" "$value"
+  fi
+  my_echo gsettings get "$scheme" "$group"
+}
 
-echo "===== Re: Checking keymapping ====="
-my_echo gsettings get org.gnome.desktop.wm.keybindings switch-group
-my_echo gsettings get org.gnome.desktop.wm.keybindings switch-input-source
-my_echo gsettings get org.gnome.desktop.wm.keybindings switch-input-source-backward
+echo "===== Start Replace keymapping ====="
+gnome_key_bind switch-group "['<Ctrl><Shift><Super>Above_Tab', '<Ctrl><Shift><Alt>Above_Tab']"
+gnome_key_bind switch-input-source "['<Alt>grave']"
+gnome_key_bind switch-input-source-backward "['<Shift><Alt>grave']"
+echo "===== Done Replace keymapping ====="
 echo
