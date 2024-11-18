@@ -53,7 +53,7 @@
 #+RESULTS:
 
 * 日本語環境
-#+begin_src sh :tangle=yes
+#+begin_src sh :tangle yes
   "$(dirname $0)/setup-jp-env.sh"
 #+end_src
 
