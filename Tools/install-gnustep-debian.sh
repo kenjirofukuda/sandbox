@@ -85,6 +85,14 @@ i_tools-make () {
   local l_repo=$(local_repo gnustep tools-make)
   "$debug" cd "$l_repo"
 
+  "$debug" "$INSTALL_CMD" \
+           binutils-gold \
+           ninja-build \
+           clang \
+           systemtap-sdt-dev \
+           libbsd-dev \
+           linux-libc-dev
+
   "$debug" ./configure \
            CC=clang \
            CXX=clang++ \
