@@ -168,7 +168,7 @@ i_libs-base () {
            libxslt-dev \
            icu-devtools \
            libicu-dev
-  if [ "$VERSION_CODE_NAME" = "jammy" ]; then
+  if [ "$VERSION_CODENAME" = "jammy" ]; then
     "$debug" "$INSTALL_CMD" libicu70
   else
     "$debug" "$INSTALL_CMD" libicu74
