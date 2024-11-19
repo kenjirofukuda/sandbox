@@ -1,9 +1,8 @@
 #+TITLE: setup
-#+PROPERTY: tangle "./setup.sh"
-#+PROPERTY: header-args:conf :tangle-mode (identity #o755)
+#+PROPERTY: :tangle "./setup.sh"
+
 * 共通ライブラリの読み込み
-#+begin_src sh :tangle yes
-  #!/usr/bin/env sh
+#+begin_src sh :tangle yes :tangle-mode (identity #o755) :shebang "#!/usr/bin/env sh"
   . "$(dirname $0)/common.sh"
   debug=my_echo
   # set -e
@@ -35,6 +34,7 @@
           read -p "${reply}: ok? (y/N):" yn
           case "$yn" in [yY]*) ;; *) reply="" ; continue ;; esac
           $debug git config --global user.name "$user_name"
+          $debug git config --global user.name
       fi
   done
 
@@ -46,6 +46,7 @@
           read -p "${reply}: ok? (y/N):" yn
           case "$yn" in [yY]*) ;; *) reply="" ; continue ;; esac
           $debug git config --global user.email "$email_addr"
+          $debug git config --global user.email
       fi
   done
 #+end_src

@@ -5,9 +5,8 @@
 
 set -e
 
-"$(dirname $0)/install-dependencies-debian.sh"
-
 "$(dirname $0)/setup-gs-devel.sh"
+"$(dirname $0)/install-dependencies-debian.sh"
 
 
 INSTALL_LAYOUT=gnustep
@@ -27,7 +26,7 @@ fi
 echo "===== Done Fix: stdc++ not found ====="
 echo ""
 
-code_name=$(grep VERSION_CODENAME /etc/os-release | awk -F= '{print $2}')
+. /etc/os-release
 
 i_libdispatch () {
   local component="libdispatch"
@@ -169,7 +168,7 @@ i_libs-base () {
            libxslt-dev \
            icu-devtools \
            libicu-dev
-  if [ "$code_name" = "jammy" ]; then
+  if [ "$VERSION_CODE_NAME" = "jammy" ]; then
     "$debug" "$INSTALL_CMD" libicu70
   else
     "$debug" "$INSTALL_CMD" libicu74
@@ -187,15 +186,6 @@ i_libs-base () {
   touch "$done_file"
   echo "===== End install ${component} ====="
   echo ""
-}
-
-
-t_libs-base () {
-  local debug=my_echo
-  local l_repo=$(local_repo gnustep libs-base)
-
-  "$debug" cd "$l_repo"
-  make check
 }
 
 
@@ -230,15 +220,6 @@ i_libs-gui () {
   touch "$done_file"
   echo "===== End install ${component} ====="
   echo ""
-}
-
-
-t_libs-gui () {
-  local debug=my_echo
-  local l_repo=$(local_repo gnustep libs-gui)
-
-  "$debug" cd "$l_repo"
-  make check
 }
 
 
@@ -404,15 +385,9 @@ i_all () {
 #  i_libs_corebase
 }
 
-t_all () {
-  t_libs-base || true
-  t_libs-gui
-}
-
 if [[ 0 -eq $(grep -c -e '^init_file' ~/.bashrc) ]]; then
   i_init_file
 fi
 
 #i_libs_quartzcore
 i_all
-t_all

@@ -22,6 +22,7 @@ while [ -z "${reply}" ]; do
         read -p "${reply}: ok? (y/N):" yn
         case "$yn" in [yY]*) ;; *) reply="" ; continue ;; esac
         $debug git config --global user.name "$user_name"
+        $debug git config --global user.name
     fi
 done
 
@@ -33,6 +34,7 @@ while [ -z "${reply}" ]; do
         read -p "${reply}: ok? (y/N):" yn
         case "$yn" in [yY]*) ;; *) reply="" ; continue ;; esac
         $debug git config --global user.email "$email_addr"
+        $debug git config --global user.email
     fi
 done
 

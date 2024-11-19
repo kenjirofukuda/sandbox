@@ -7,8 +7,8 @@ echo "===== Start install mozc ====="
 if [ ! -f /usr/lib/mozc/mozc_server ]; then
   echo "Now install Japanese environment"
   if  [ -f /etc/os-release ]; then
-    id=$(cat /etc/os-release | grep -e '^ID=' | awk -F= '{print $NF}')
-    if [ "$id" = "ubuntu" ]; then
+    . /etc/os-release
+    if [ "$ID" = "ubuntu" ]; then
       sudo wget https://www.ubuntulinux.jp/sources.list.d/noble.sources -O /etc/apt/sources.list.d/ubuntu-ja.sources
       sudo apt -U upgrade
       sudo apt -y install ubuntu-defaults-ja

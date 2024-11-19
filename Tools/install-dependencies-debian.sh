@@ -1,6 +1,9 @@
 #!/usr/bin/env sh
 
-version_id="$(cat /etc/os-release | grep -e '^VERSION_ID=' | awk -F= '{print $NF}' | tr -d '"')"
+set -e
+
+. /etc/os-release
+
 done_file="${HOME}/.config/$(basename $0).done"
 if [ -f "$done_file" ]; then
   echo "===== GNUstep dependencies already installed. ====="
@@ -10,7 +13,7 @@ fi
 echo "===== Start install GNUstep dependencies  ====="
 ref_dir="${HOME}/Documents/github/kenjirofukuda/gs-desktop/dependencies"
 listfile="${ref_dir}/ubuntu.txt"
-missing_file="${ref_dir}/${version_id}.missing"
+missing_file="${ref_dir}/${VERSION_ID}.missing"
 for DD in $(cat "$listfile" | grep -v -e '^#') ;do
   echo ===== "$DD" =====
   sudo apt-get install -y "$DD" || echo "$DD" >>! "$missing_file"
