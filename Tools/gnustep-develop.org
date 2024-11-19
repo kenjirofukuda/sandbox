@@ -2,15 +2,148 @@
 * クラス作成のテンプレート作成
 クラス名を入力し、ヘッダーとソースの雛形を作成する
 引数を渡されなければ、入力を施す。
-** mk-objc-class.sh
-#+begin_src sh :tangle "./mk-objc-class.sh" :tangle-mode (identity #o755) :shebang "#!/usr/bin/env sh"
+** mk-objc-common.sh
+#+begin_src sh :tangle "./mk-objc-common.sh"
+  to_camel_name () {
+    echo "$(echo "$1" | sed -r 's/(^|-)(\w)/\U\2/g')"
+  }
+
+  to_header_marker () {
+    echo "_$(echo "$class_name" | tr '[a-z]' '[A-Z]')_H_"
+  }
+
+  emacs_marker () {
+    echo "// -*- mode: ObjC -*-"
+  }
+
+  vim_marker () {
+    echo "// vim: filetype=objc ts=2 sw=2 expandtab"
+  }
+
+  make_header() {
+  local class_name="$(to_camel_name $1)"
+  local header_name="$(to_header_marker $class_name)"
+  cat << EOF_H
+  $(emacs_marker)
+  #ifndef $header_name
+  #define $header_name
+
+  #import <Foundation/Foundation.h>
+
+  @interface $class_name : NSObject
+  {
+    NSString *_name;
+  }
+  - (instancetype) init;
+  - (void) dealloc;
+  - (NSString *) name;
+  - (void) setName: (NSString *)name;
+  @end
+
+  #endif
+  $(vim_marker)
+  EOF_H
+  }
+
+  make_source () {
+  class_name="$(to_camel_name $1)"
+
+  cat << EOF_S
+  $(emacs_marker)
+  #import <Foundation/Foundation.h>
+  #import "$class_name.h"
+
+  @implementation $class_name
+  - (instancetype) init
+  {
+    if ((self = [super init]) != nil)
+      {
+        // implement hear
+      }
+    return self;
+  }
+
+  - (void) dealloc
+  {
+    RELEASE(_name);
+    [super dealloc];
+  }
+
+  - (NSString *)name
+  {
+    return _name;
+  }
+
+  - (void) setName: (NSString *)name
+  {
+    ASSIGNCOPY(_name, name);
+  }
+
+  @end
+
+  $(vim_marker)
+  EOF_S
+  }
+#+end_src
+
+** mk-objc-header.sh
+#+begin_src sh :tangle "./mk-objc-header.sh" :tangle-mode (identity #o755) :shebang "#!/usr/bin/env sh"
+
+  . "$(dirname $0)/mk-objc-common.sh"
 
   if [ $# -eq 0 ]; then
       read -p "Enter class name: " class_name
   else
       class_name="$1"
   fi
-  echo "$class_name"
+  make_header "$class_name"
+#+end_src
+** mk-objc-source.sh
+#+begin_src sh :tangle "./mk-objc-source.sh" :tangle-mode (identity #o755) :shebang "#!/usr/bin/env sh"
+
+  . "$(dirname $0)/mk-objc-common.sh"
+
+  if [ $# -eq 0 ]; then
+      read -p "Enter class name: " class_name
+  else
+      class_name="$1"
+  fi
+  make_source "$class_name"
+#+end_src
+** mk_objc.sh
+#+begin_src sh :tangle "./mk-objc.sh" :tangle-mode (identity #o755) :shebang "#!/usr/bin/env sh"
+
+  . "$(dirname $0)/mk-objc-common.sh"
+
+  if [ $# -eq 0 ]; then
+      read -p "Enter class name: " class_name
+  else
+      class_name="$1"
+  fi
+  class_name="$(to_camel_name $class_name)"
+  header_file="./${class_name}.h"
+  if [ -f "$header_file" ]; then
+      echo "Header file exists!"
+      exit 1
+  fi
+  source_file="./${class_name}.m"
+  if [ -f "$source_file" ]; then
+      echo "Source file exists!"
+      exit 1
+  fi
+  make_header "$class_name" > "$header_file"
+  make_source "$class_name" > "$source_file"
+#+end_src
+
+* 22.04への対応
+** TODO mozc の自動ひらがな化
+失敗。ibusのバージョンが低いのとactive_on_launchキーがそもそも存在しなかった。
+** DONE libobjc2 で clangが <vector> を見つけられない
+以下のコードをinstall-gnustep-debian.shに挿入することで必要なライブラリのロードを行った。
+#+begin_src sh
+  libver=$(clang -v 2>&1 | grep -i "Selected GCC" | awk -F/ '{print $NF}')
+  pkg_name="libstdc++-${libver}-dev"
+  sudo apt install -y "${pkg_name}" || echo "not found: ${pkg_name}"
 #+end_src
 
 * lldb デバッグに関するヒント

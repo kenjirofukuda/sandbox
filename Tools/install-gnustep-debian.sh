@@ -26,6 +26,14 @@ fi
 echo "===== Done Fix: stdc++ not found ====="
 echo ""
 
+
+echo "===== Start Fix: clang <vector> not found ====="
+libver=$(clang -v 2>&1 | grep -i "Selected GCC" | awk -F/ '{print $NF}')
+pkg_name="libstdc++-${libver}-dev"
+sudo apt install -y "${pkg_name}" || echo "not found: ${pkg_name}"
+echo "===== Done Fix: clang <vector> not found ====="
+echo ""
+
 . /etc/os-release
 
 i_libdispatch () {
