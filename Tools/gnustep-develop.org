@@ -1,4 +1,18 @@
 #+TITLE: GNUstep 開発ノート
+* クラス作成のテンプレート作成
+クラス名を入力し、ヘッダーとソースの雛形を作成する
+引数を渡されなければ、入力を施す。
+** mk-objc-class.sh
+#+begin_src sh :tangle "./mk-objc-class.sh" :tangle-mode (identity #o755) :shebang "#!/usr/bin/env sh"
+
+  if [ $# -eq 0 ]; then
+      read -p "Enter class name: " class_name
+  else
+      class_name="$1"
+  fi
+  echo "$class_name"
+#+end_src
+
 * lldb デバッグに関するヒント
 - https://github.com/realgud/realgud
 - https://gist.github.com/ryanchang/a2f738f0c3cc6fbd71fa
@@ -10,7 +24,7 @@ nfontに関する情報はインターネット上には少なく、以下を参
 - file:///home/kenjiro/Documents/github/trunkmaster/nextspace/Documentation/Developer/FontPackages.md
 
 * プレーンな24.04 LTS にいれて確認したこと
-** 続行不可能なエラー
+** DONE 続行不可な能エラー
 - libdispatch: c++ヘッダーやライブラリを認識できていない
 - libs-back: x11 で基本的なヘッダーやライブラリが全く入っていない
 - libscorebase: objc_getClassがないとか言って､libobjc2がインストールされていないかのような終了の仕方をする｡
