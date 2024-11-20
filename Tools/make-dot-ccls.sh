@@ -42,5 +42,7 @@ cat <<EOF > $settings_file
 EOF
 fi
 
+touch "$target_dir/.projectile"
+
 echo Success
 exit 0

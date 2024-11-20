@@ -3,7 +3,10 @@
 *.log
 
 **/.ccls
+**/.ccls-root
 **/.ccls-cache/*
+obj/
+*.app/
 
 
 # sbt specific
