@@ -252,6 +252,29 @@ corebaseは放置プロジェクトなので､ついてこれないのもわか
 - ~/Documents/github/swiftlang/swift-corelibs-libdispatch/
 - ~/Documents/github/trunkmaster/nextspace/
 
+* TODO Menuがホストのデスクトップに隠れてしま件う件
+NSMenu がホストのDockやメニューバーの背後に隠れてしまう。
+デフォルトの原点が top left なのは理解できるが、GWorkspaceのleft bottom に並ぶ起動済みアプリケーションのアイコンはDockに隠れることなく、表示されている。
+しかも、=[Ubuntu Desktop][Dock][Icon size]=を更新すると、それに合わせてデスクトップ領域が追従するのである。この仕掛けをNSMenuに適用させたい。
+アイコンも内部的には(X11の観点から)はウィンドウのはずである。
+Window はデスクトップ環境からはみ出すのに、アイコンははみ出さないできっちりデスクトップ領域に収まっている。
+不思議だ。
+
+#+begin_src
+GWDesktopView << FSNIconsView << NSView <NSTextFieldDelegate>
+#+end_src
+
+* TODO GWorkspaceのFile Viewer にアイコンをドロップできない件
+現在、GWorkspaceのお気に入り領域にアイコンを登録できなくて難儀している。なぜなのか?
+
+
 * 無関係
 ここは執筆中に本テーマに無関係なことを思いついたときに記述する場所である。
 ** TODO githubのリンク上であるキーを押したら自動的にpullする
+** org の絞り込みからの脱出
+https://emacs.stackexchange.com/questions/57839/opposite-of-org-narrow-to-subtree
+Q: C-x n s にフォーカスを絞り込むがどうやってもとに戻すのか?
+A: C-x n w で復帰できる
+** TODO orgの右端が隠れてしまう件
+特定のファイルで、右端が80カラムで隠れてしまう。すべてが同じ隠れ方をするのなら原因を特定しやすいがファイルによって挙動が異なるのが解せない。
+visual-line-modeは折返しをしてくれて便利だが、off にトグルでターンするとき、visual-fill-column-mode も同時に行ってくれないので２つのコマンドを常に発行しなければならない。

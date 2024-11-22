@@ -1,6 +1,6 @@
 BEGIN {
-  reg1 = @/@selector\(.+\)/
-  reg2 = @/@(interface|implementation)\s+\S+\(.+\)/
+  reg1 = /@selector\(.+\)/
+  reg2 = /@(interface|implementation)\s+\S+\(.+\)/
 }
 
 {

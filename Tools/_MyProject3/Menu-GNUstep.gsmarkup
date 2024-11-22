@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+  <objects>
+    <menu type="main">
+      <menuItem title="Quit" keyEquivalent="q" action="terminate:" />
+    </menu>
+  </objects>
+</gsmarkup>

@@ -17,23 +17,23 @@
 @implementation MyDelegate : NSObject
 - (void) dealloc
 {
-  RELEASE (myWindow);
+  RELEASE(myWindow);
   [super dealloc];
 }
 
 - (void) printHello: (id)sender
 {
-  printf ("Hello!\n");
+  printf("Hello!\n");
 }
 
 - (void) createMenu
 {
   NSMenu *menu;
 
-  menu = AUTORELEASE ([NSMenu new]);
+  menu = AUTORELEASE([NSMenu new]);
 
   [menu addItemWithTitle: @"Quit"
-                  action: @selector (terminate:)
+                  action: @selector(terminate:)
 
            keyEquivalent: @"q"];
 
@@ -44,20 +44,20 @@
 {
   NSRect rect;
   unsigned int styleMask = NSTitledWindowMask
-                         | NSMiniaturizableWindowMask;
+                           | NSMiniaturizableWindowMask;
   NSButton *myButton;
   NSSize buttonSize;
 
-  myButton = AUTORELEASE ([NSButton new]);
+  myButton = AUTORELEASE([NSButton new]);
   [myButton setTitle: @"Print Hello!"];
   [myButton sizeToFit];
   [myButton setTarget: self];
-  [myButton setAction: @selector (printHello:)];
+  [myButton setAction: @selector(printHello:)];
 
   buttonSize = [myButton frame].size;
-  rect = NSMakeRect (100, 100,
-                     buttonSize.width,
-                     buttonSize.height);
+  rect = NSMakeRect(100, 100,
+                    buttonSize.width,
+                    buttonSize.height);
 
   myWindow = [NSWindow alloc];
   myWindow = [myWindow initWithContentRect: rect
@@ -81,10 +81,10 @@
 }
 @end
 
-int main (int argc, const char **argv)
+int main(int argc, const char **argv)
 {
   [NSApplication sharedApplication];
   [NSApp setDelegate: [MyDelegate new]];
 
-  return NSApplicationMain (argc, argv);
+  return NSApplicationMain(argc, argv);
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+  <objects>
+    <window title="This is a test window" closable="no">
+      <button title="Print Hello!" action="printHello:" target="#NSOwner" />
+    </window>
+  </objects>
+</gsmarkup>

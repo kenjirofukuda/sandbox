@@ -1,7 +1,7 @@
 #!/bin/bash
 
-astyle_options="$(dirname $0)/_astyle_gnustep"
-script="$(dirname $0)/post_reformat.awk"
+astyle_options="$(dirname $0)/_astyle-gnustep"
+script="$(dirname $0)/post-reformat.awk"
 
 if [ ! -f "$astyle_options" ]; then
   echo "not found: $astyle_options"

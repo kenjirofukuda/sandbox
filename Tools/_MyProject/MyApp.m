@@ -16,7 +16,7 @@
 @implementation MyDelegate : NSObject
 - (void) dealloc
 {
-  RELEASE (myWindow);
+  RELEASE(myWindow);
   DEALLOC;
 }
 
@@ -24,10 +24,10 @@
 {
   NSMenu *menu;
 
-  menu = AUTORELEASE ([NSMenu new]);
+  menu = AUTORELEASE([NSMenu new]);
 
   [menu addItemWithTitle: @"Quit"
-                  action: @selector (terminate:)
+                  action: @selector(terminate:)
            keyEquivalent: @"q"];
 
   [NSApp setMainMenu: menu];
@@ -35,12 +35,12 @@
 
 - (void) createWindow
 {
-  NSRect rect = NSMakeRect (100, 100, 800, 600);
+  NSRect rect = NSMakeRect(100, 100, 800, 600);
   unsigned int styleMask = NSWindowStyleMaskBorderless
-                         | NSWindowStyleMaskTitled
-                         | NSWindowStyleMaskClosable
-                         | NSWindowStyleMaskMiniaturizable
-                         | NSWindowStyleMaskResizable;
+                           | NSWindowStyleMaskTitled
+                           | NSWindowStyleMaskClosable
+                           | NSWindowStyleMaskMiniaturizable
+                           | NSWindowStyleMaskResizable;
 
   myWindow = [[NSWindow alloc] initWithContentRect: rect
                                          styleMask: styleMask
@@ -60,12 +60,16 @@
 {
   [myWindow makeKeyAndOrderFront: nil];
 }
+
+- (void) someMethod
+{
+
+}
 @end
 
-int main (int argc, const char **argv)
+int main(int argc, const char **argv)
 {
   [NSApplication sharedApplication];
   [NSApp setDelegate: [MyDelegate new]];
-
-  return NSApplicationMain (argc, argv);
+  return NSApplicationMain(argc, argv);
 }
