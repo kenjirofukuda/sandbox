@@ -225,6 +225,8 @@ i_libs-gui () {
   "$debug" ./configure
   "$debug" make -j$(nproc)
   "$debug" sudo -E make install
+  "$debug" defaults write NSGlobalDomain GSMenuOriginLeftMargin 70
+  "$debug" defaults write NSGlobalDomain GSMenuOriginTopMargin  40
   touch "$done_file"
   echo "===== End install ${component} ====="
   echo ""
