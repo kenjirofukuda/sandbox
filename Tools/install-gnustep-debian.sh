@@ -377,6 +377,16 @@ fi
 EOF3
 }
 
+i_init_path () {
+  cat <<'EOF4' >> ~/.bashrc
+
+cmd_dir1="$HOME/Documents/github/kenjirofukuda/sandbox/Tools"
+cmd_dir2="$HOME/Documents/github/kenjirofukuda/sandbox/bootstrap"
+
+export PATH="${PATH}:${cmd_dir1}::${cmd_dir2}"
+EOF4
+}
+
 
 i_all () {
   i_tools-make
@@ -395,6 +405,10 @@ i_all () {
 
 if [[ 0 -eq $(grep -c -e '^init_file' ~/.bashrc) ]]; then
   i_init_file
+fi
+
+if [[ 0 -eq $(grep -c -e '^cmd_dir' ~/.bashrc) ]]; then
+  i_init_path
 fi
 
 #i_libs_quartzcore
