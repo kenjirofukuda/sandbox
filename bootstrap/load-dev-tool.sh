@@ -49,6 +49,11 @@ fi
 $INSTALL_CMD libtool
 $INSTALL_CMD libtool-bin
 
+$INSTALL_CMD astyle
+$INSTALL_CMD clang-format
+$INSTALL_CMD bear
+$INSTALL_CMD silversearcher-ag
+
 #other
 ensure_cmd locate plocate
 ensure_cmd ifconfig net-tools

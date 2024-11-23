@@ -2,7 +2,7 @@
 
 set -e
 
-conf_file="$(dirname $0)/fonts-jp-conf.tar"
+conf_file=$(realpath "$(dirname $0)/fonts-jp-conf.tar")
 if [ ! -f "$conf_file" ]; then
   echo "not found: $conf_file"
   exit 1
@@ -22,8 +22,8 @@ cd "$extract_dir"
 pwd
 cd "$link_dir"
 pwd
-echo sudo tar xvf "$conf_file"
+sudo tar xvf "$conf_file"
 for f in $filenames; do
-  echo rm -rf "$f"
-  echo ln -s "$extract_dir/$f" "$f"
+  sudo rm -rf "$f"
+  sudo ln -s "$extract_dir/$f" "$f"
 done
