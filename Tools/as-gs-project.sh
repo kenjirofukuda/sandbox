@@ -29,4 +29,4 @@ fi
 
 touch "${target_dir}/.projectile"
 "$(dirname $0)/make-dot-ccls.sh"
-"$(dirname $0)/use-appterminatereply.sh
+"$(dirname $0)/use-appterminatereply.sh"
