@@ -11,4 +11,5 @@ add-braces
 align-method-colon
 align-pointer=name
 pad-method-colon=none
+pad-negation
 mode=c
