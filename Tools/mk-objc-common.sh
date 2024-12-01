@@ -30,8 +30,6 @@ $(emacs_marker)
 }
 - (instancetype) init;
 - (void) dealloc;
-- (NSString *) name;
-- (void) setName: (NSString *)name;
 @end
 
 #endif
@@ -50,9 +48,11 @@ $(emacs_marker)
 @implementation $class_name
 - (instancetype) init
 {
-  if ((self = [super init]) != nil)
+  self = [super init];
+  if (self != nil)
     {
-      // implement hear
+      // NSDebugLog(@"%@", "Implement hear");
+      // NSDebugLLog(@"Category", @"%@", "Implement hear");
     }
   return self;
 }
@@ -60,19 +60,8 @@ $(emacs_marker)
 - (void) dealloc
 {
   RELEASE(_name);
-  [super dealloc];
+  DEALLOC;
 }
-
-- (NSString *)name
-{
-  return _name;
-}
-
-- (void) setName: (NSString *)name
-{
-  ASSIGNCOPY(_name, name);
-}
-
 @end
 
 $(vim_marker)
