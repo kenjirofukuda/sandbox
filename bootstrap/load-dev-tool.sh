@@ -3,8 +3,12 @@
 . "$(dirname $0)/common.sh"
 
 function install_vimrc {
-if [ ! -f ~/.vimrc ]; then
-cat <<EOF_VIMRC >> ~/.vimrc
+  vimrc="${HOME}/.vimrc"
+  if [ `uname` = "Haiku" ]; then
+    vimrc="${HOME}/config/settings/vim/vimrc"
+  fi
+  if [ ! -f "${vimrc}" ]; then
+cat <<EOF_VIMRC >> "${vimrc}"
 set number
 syntax on
 set expandtab
@@ -12,7 +16,7 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 EOF_VIMRC
-fi
+  fi
 }
 
 # archiver
@@ -42,6 +46,8 @@ ensure_cmd vim
 # ensure_cmd emacs
 if [ $NIX_ID = "bsd" ]; then
   ensure_cmd ag the_silver_searcher
+elif [ $NIX_ID = "haiku" ]; then
+  ensure_cmd ag the_silver_searcher
 else
   ensure_cmd ag silversearcher-ag
 fi
@@ -51,8 +57,6 @@ $INSTALL_CMD libtool-bin
 
 $INSTALL_CMD clang-format
 $INSTALL_CMD bear
-$INSTALL_CMD silversearcher-ag
-
 
 #other
 ensure_cmd locate plocate

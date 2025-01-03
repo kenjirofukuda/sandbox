@@ -10,8 +10,20 @@ install_iosevka () {
   saved_pwd=$(pwd)
   my_echo mkdir -p ~/Downloads
   my_echo cd ~/Downloads
-  my_echo curl -O https://sid.ethz.ch/debian/fonts-iosevka/fonts-iosevka_22.0.0%2Bds-1_all.deb
-  my_echo sudo dpkg -i fonts-iosevka_22.0.0%2Bds-1_all.deb
+  deb_name="fonts-iosevka_22.0.0%2Bds-1_all.deb"
+  my_echo curl -O "https://sid.ethz.ch/debian/fonts-iosevka/${deb_name}"
+  if [ "$NIX_ID" = "haiku" ]; then
+    local_fonts_dir="${HOME}/config/non-packaged/data/fonts"
+    my_echo mkdir -p "${local_fonts_dir}"
+    my_echo ar x "${deb_name}"
+    if [ -f data.tar.xz ]; then
+      my_echo tar Jxfv data.tar.xz
+      # my_echo find ./usr -name "*.ttf" -exec cp '{}' "${local_fonts_dir}"/ ';'
+      my_echo mv ./usr/share/fonts/truetype/iosevka/*.ttf "${local_fonts_dir}"/
+    fi
+  else
+    my_echo sudo dpkg -i "${deb_name}"
+  fi
   my_echo cd "$saved_pwd"
 }
 
@@ -45,6 +57,8 @@ reply=$(which emacs || echo "not found")
 if [ "$reply" = "not found" ]; then
   if [ -d /snap ]; then
     snap install emacs --classic
+  elif [ "$NIX_ID" = "haiku" ]; then
+    pkgman install -y emacs
   else
     sudo apt -y install emacs
   fi

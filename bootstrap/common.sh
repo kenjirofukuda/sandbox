@@ -9,6 +9,10 @@ case $(uname) in
     NIX_ID="bsd"
     INSTALL_CMD="sudo pkg install -y"
     ;;
+  *Haiku)
+    NIX_ID="haiku"
+    INSTALL_CMD="pkgman install -y"
+    ;;
   *)
     echo "!!! Sorry Unsupported. !!! "
     exit 1
