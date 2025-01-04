@@ -1,5 +1,6 @@
-# -*- mode: sh; coding: utf-8 -*- #
+#  -*- mode: sh; coding: utf-8 -*- #
 
+CLONE_MODE=https
 INSTALL_CMD="sudo apt install -y"
 NIX_ID="linux"
 case $(uname) in
@@ -53,6 +54,9 @@ ensure_repo () {
   local my_repo="${my_base}/${repo}"
   local remote_repo="https://github.com/${owner}/${repo}.git"
   local debug="my_echo"
+  if [ "$CLONE_MODE" != "https" ]; then
+    remote_repo="git@github.com:${owner}/${repo}.git"
+  fi
 
   "$debug" mkdir -p "$my_base"
   if [ -d "$my_repo" ]; then

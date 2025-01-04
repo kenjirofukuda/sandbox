@@ -1,0 +1,13 @@
+style=kr
+indent=force-tab=4
+pad-comma
+pad-oper
+pad-header
+pad-method-prefix
+unpad-return-type
+break-closing-braces
+break-return-type
+add-braces
+align-pointer=name
+pad-method-colon=none
+mode=c
