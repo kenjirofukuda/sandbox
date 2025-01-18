@@ -23,6 +23,6 @@ if [ `uname` = "Haiku" ]; then
        bashrc="${HOME}/config/settings/bashrc"
 fi
 if [ 0 -eq $(grep -c -e '^cmd_local' "${bashrc}") ]; then
-    echo 'cmd_local="$HOME/.local/bin' >> "${bashrc}"
+    echo 'cmd_local="$HOME/.local/bin"' >> "${bashrc}"
     echo 'export PATH="$cmd_local:${PATH}"' >> "${bashrc}"
 fi
