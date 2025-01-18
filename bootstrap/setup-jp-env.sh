@@ -2,8 +2,16 @@
 
 . "$(dirname $0)/common.sh"
 
+
 # 日本語環境がなければインストール
 echo "===== Start install mozc ====="
+if [ "${NIX_ID}" = "haiku" ]; then
+  ensure_cmd "mozc"
+  echo "===== Done install mozc ====="
+  echo ""
+  exit 0
+fi
+
 if [ ! -f /usr/lib/mozc/mozc_server ]; then
   echo "Now install Japanese environment"
   if  [ -f /etc/os-release ]; then

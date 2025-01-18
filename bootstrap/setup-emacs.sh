@@ -37,14 +37,23 @@ fi
 echo "===== Done Iosevka fonts for Emacs  ====="
 echo ""
 
-sudo apt install -y libtool libtool-bin
+if [ "${NIX_ID}" = "haiku" ]; then
+  my_echo pkgman install -y libtool
+else
+  my_echo sudo apt install -y libtool libtool-bin
+fi
+
 echo "===== Start install CMake ====="
 reply=$(which cmake || echo "not found")
 if [ "$reply" = "not found" ]; then
-  if [ -d /snap ]; then
-    snap install cmake --classic
+  if [ "${NIX_ID}" = "haiku" ]; then
+    pkgman install -y cmake
   else
-    sudo apt -y instatll cmake
+    if [ -d /snap ]; then
+      snap install cmake --classic
+    else
+      sudo apt -y instatll cmake
+    fi
   fi
 else
   echo "CMake already installed."
