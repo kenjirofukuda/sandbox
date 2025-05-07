@@ -39,7 +39,13 @@ elif [ $NIX_ID = "linux" ]; then
   ensure_cmd make build-essential
   ensure_cmd ninja ninja-build
 fi
-# ensure_cmd cmake
+
+if [ -d /snap ]; then
+  snap install cmake --classic
+else
+  ensure_cmd cmake
+fi
+
 # for commapile vterm C library
 
 # editor
