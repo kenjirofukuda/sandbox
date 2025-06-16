@@ -38,6 +38,8 @@ while [ -z "${reply}" ]; do
     fi
 done
 
+"$(dirname $0)/install-iosevka.sh"
+
 "$(dirname $0)/setup-jp-env.sh"
 
 "$(dirname $0)/setup-emacs.sh"

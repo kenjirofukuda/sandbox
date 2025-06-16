@@ -4,45 +4,6 @@
 
 . "$(dirname $0)/common.sh"
 
-install_iosevka () {
-  echo "===== Downloading fonts... ====="
-  ensure_cmd curl
-  saved_pwd=$(pwd)
-  my_echo mkdir -p ~/Downloads
-  my_echo cd ~/Downloads
-  deb_name="fonts-iosevka_22.0.0%2Bds-1_all.deb"
-  my_echo curl -O "https://sid.ethz.ch/debian/fonts-iosevka/${deb_name}"
-  if [ "$NIX_ID" = "haiku" ]; then
-    local_fonts_dir="${HOME}/config/non-packaged/data/fonts"
-    my_echo mkdir -p "${local_fonts_dir}"
-    my_echo ar x "${deb_name}"
-    if [ -f data.tar.xz ]; then
-      my_echo tar Jxfv data.tar.xz
-      # my_echo find ./usr -name "*.ttf" -exec cp '{}' "${local_fonts_dir}"/ ';'
-      my_echo mv ./usr/share/fonts/truetype/iosevka/*.ttf "${local_fonts_dir}"/
-    fi
-  else
-    my_echo sudo dpkg -i "${deb_name}"
-  fi
-  my_echo cd "$saved_pwd"
-}
-
-echo "===== Start Iosevka fonts for Emacs  ====="
-reply=$(fc-list | grep -c -i "iosevka")
-if [ $reply -eq 0 ]; then
-  install_iosevka
-else
-  echo "Already Installed."
-fi
-echo "===== Done Iosevka fonts for Emacs  ====="
-echo ""
-
-if [ "${NIX_ID}" = "haiku" ]; then
-  my_echo pkgman install -y libtool
-else
-  my_echo sudo apt install -y libtool libtool-bin
-fi
-
 echo "===== Start install CMake ====="
 reply=$(which cmake || echo "not found")
 if [ "$reply" = "not found" ]; then

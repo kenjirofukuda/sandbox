@@ -53,6 +53,11 @@
 
 #+RESULTS:
 
+* Iosevkaフォント
+#+begin_src sh :tangle yes
+  "$(dirname $0)/install-iosevka.sh"
+#+end_src
+
 * 日本語環境
 #+begin_src sh :tangle yes
   "$(dirname $0)/setup-jp-env.sh"

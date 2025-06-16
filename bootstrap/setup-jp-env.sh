@@ -29,6 +29,10 @@ if [ ! -f /usr/lib/mozc/mozc_server ]; then
       sudo apt upgrade
       sudo apt -y install ubuntu-defaults-ja
     fi
+    if [ "$ID" = "debian" ]; then
+      sudo apt install task-japanese-desktop
+      sudo apt install ibus-mozc
+    fi
   fi
 else
   echo "Japanese environment already installed."
