@@ -178,6 +178,8 @@ i_libs-base () {
            libicu-dev
   if [ "$VERSION_CODENAME" = "jammy" ]; then
     "$debug" "$INSTALL_CMD" libicu70
+  elif [ "$VERSION_CODENAME" = "bookworm" ]; then
+    "$debug" "$INSTALL_CMD" libicu72
   else
     "$debug" "$INSTALL_CMD" libicu74
   fi
