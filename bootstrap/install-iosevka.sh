@@ -42,7 +42,7 @@ if [ "$NIX_ID" = "haiku" ]; then
   dest="${HOME}/config/non-packaged/data/fonts"
 fi
 my_echo sudo mkdir -p "$dest"
-my_echo sudo mv *.ttc "{$dest}/"
+my_echo sudo mv *.ttc "${dest}/"
 
 my_echo sudo fc-cache -fv
 cleanup
